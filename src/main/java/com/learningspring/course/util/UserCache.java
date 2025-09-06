@@ -24,7 +24,7 @@ public class UserCache
         return instance;
     }
     
-    public Optional<User> getUser( long id )
+    public Optional<User> getUser( Long id )
     {
         return Optional.ofNullable( USERS_MAP.get( id ) );
     }

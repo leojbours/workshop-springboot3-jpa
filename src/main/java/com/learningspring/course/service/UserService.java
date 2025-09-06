@@ -26,7 +26,7 @@ public class UserService
         return USER_REPOSITORIES.findAll();
     }
     
-    public User findById( long id )
+    public User findById( Long id )
     {
         Optional<User> user = USER_CACHE.getUser( id );
         

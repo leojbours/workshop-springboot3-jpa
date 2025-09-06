@@ -5,7 +5,6 @@ import com.learningspring.course.repositories.OrderRepositories;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class OrderService
@@ -24,8 +23,6 @@ public class OrderService
     
     public Order findById( long id )
     {
-        Optional<Order> order = orderRepositories.findById( id );
-        
-        return order.get();
+        return orderRepositories.findById( id ).get();
     }
 }

@@ -1,8 +1,10 @@
 package com.learningspring.course.config;
 
+import com.learningspring.course.entities.Category;
 import com.learningspring.course.entities.Order;
 import com.learningspring.course.entities.OrderStatus;
 import com.learningspring.course.entities.User;
+import com.learningspring.course.repositories.CategoryRepositories;
 import com.learningspring.course.repositories.OrderRepositories;
 import com.learningspring.course.repositories.UserRepositories;
 import org.springframework.boot.CommandLineRunner;
@@ -18,11 +20,15 @@ public class TestConfig implements CommandLineRunner
 {
     final UserRepositories userRepositories;
     final OrderRepositories orderRepositories;
+    final CategoryRepositories categoryRepositories;
     
-    public TestConfig( UserRepositories userRepositories, OrderRepositories orderRepositories )
+    public TestConfig( UserRepositories userRepositories,
+                       OrderRepositories orderRepositories,
+                       CategoryRepositories categoryRepositories )
     {
         this.userRepositories = userRepositories;
         this.orderRepositories = orderRepositories;
+        this.categoryRepositories = categoryRepositories;
     }
     
     @Override
@@ -38,5 +44,11 @@ public class TestConfig implements CommandLineRunner
         Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), user, OrderStatus.SHIPPED );
         
         orderRepositories.saveAll( List.of( o1, o2, o3 ) );
+        
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+        
+        categoryRepositories.saveAll( List.of( cat1, cat2, cat3 ) );
     }
 }

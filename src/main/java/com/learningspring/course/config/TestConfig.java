@@ -1,6 +1,7 @@
 package com.learningspring.course.config;
 
 import com.learningspring.course.entities.Order;
+import com.learningspring.course.entities.OrderStatus;
 import com.learningspring.course.entities.User;
 import com.learningspring.course.repositories.OrderRepositories;
 import com.learningspring.course.repositories.UserRepositories;
@@ -32,9 +33,9 @@ public class TestConfig implements CommandLineRunner
         
         userRepositories.saveAll( List.of( user, user2 ) );
         
-        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), user);
-        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), user2);
-        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), user);
+        Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), user, OrderStatus.PAID );
+        Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), user2, OrderStatus.WAITING_PAYMENT );
+        Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), user, OrderStatus.SHIPPED );
         
         orderRepositories.saveAll( List.of( o1, o2, o3 ) );
     }

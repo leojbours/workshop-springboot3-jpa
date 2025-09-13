@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
-  OrderRepositories orderRepositories;
+  private OrderRepositories orderRepositories;
 
   public OrderService(OrderRepositories orderRepositories) {
     this.orderRepositories = orderRepositories;

@@ -2,10 +2,12 @@ package com.learningspring.course.config;
 
 import com.learningspring.course.entities.Category;
 import com.learningspring.course.entities.Order;
+import com.learningspring.course.entities.OrderItem;
 import com.learningspring.course.entities.OrderStatus;
 import com.learningspring.course.entities.Product;
 import com.learningspring.course.entities.User;
 import com.learningspring.course.repositories.CategoryRepositories;
+import com.learningspring.course.repositories.OrderItemRepository;
 import com.learningspring.course.repositories.OrderRepositories;
 import com.learningspring.course.repositories.ProductRepositories;
 import com.learningspring.course.repositories.UserRepositories;
@@ -22,16 +24,19 @@ public class TestConfig implements CommandLineRunner {
   final OrderRepositories orderRepositories;
   final CategoryRepositories categoryRepositories;
   final ProductRepositories productRepositories;
+  final OrderItemRepository orderItemRepository;
 
   public TestConfig(
       UserRepositories userRepositories,
       OrderRepositories orderRepositories,
       CategoryRepositories categoryRepositories,
-      ProductRepositories productRepositories) {
+      ProductRepositories productRepositories,
+      OrderItemRepository orderItemRepository) {
     this.userRepositories = userRepositories;
     this.orderRepositories = orderRepositories;
     this.categoryRepositories = categoryRepositories;
     this.productRepositories = productRepositories;
+    this.orderItemRepository = orderItemRepository;
   }
 
   @Override
@@ -69,5 +74,12 @@ public class TestConfig implements CommandLineRunner {
     p5.getCategories().add(cat2);
 
     productRepositories.saveAll(List.of(p1, p2, p3, p4, p5));
+
+    OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+    OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+    OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+    OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+    orderItemRepository.saveAll(List.of(oi1, oi2, oi3, oi4));
   }
 }
